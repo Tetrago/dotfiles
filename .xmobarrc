@@ -1,0 +1,17 @@
+Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+          , borderColor = "black"
+          , border = TopB
+          , bgColor = "black"
+          , fgColor = "grey"
+          , position = TopW L 100
+          , commands = [ Run Cpu [ "-L", "3", "-H", "50", "--normal", "green", "--high", "red" ] 10
+                          , Run Memory [ "-t", "Mem: <usedratio>%"] 10
+                          , Run Swap [] 10
+                          , Run MultiCoreTemp [ "-t", "Temp: <avg>C", "-L", "60", "-H", "75", "--normal", "green", "--high", "red" ] 50
+                          , Run Date "%a %b %_d %Y" "date" 10
+                          , Run Date "%I:%M %p" "time" 10
+                          ]
+          , sepChar = "%"
+          , alignSep = "}{"
+          , template = "%cpu% | %memory% * %swap% | %multicoretemp%}<fc=#2af5ff>%date%</fc> %time%{"
+          }
