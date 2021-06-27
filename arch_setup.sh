@@ -10,15 +10,31 @@ echo ""
 
 # --- Script startup ------------------------------------------------------------------------------
 
-COLOR_CYAN='\033[0;36m'
-COLOR_NONE='\033[0m'
-
 base_user=${SUDO_USER:-${USER}}
 base_home=$(eval echo ~$base_user)
 
+COLOR_GREEN='\033[0;32m'
+COLOR_CYAN='\033[0;36m'
+COLOR_NONE='\033[0m'
+
+printf_space ()
+{
+  for i in $(seq $1)
+  do
+    echo -n "  "
+  done
+}
+
 log_step ()
 {
-  echo -e "${COLOR_CYAN}$1${COLOR_NONE}"
+  printf_space $1
+  echo -e "$COLOR_GREEN> $2$COLOR_NONE"
+}
+
+log_list ()
+{
+  printf_space $1
+  echo -e "$COLOR_CYAN- $2$COLOR_NONE"
 }
 
 as_base ()
@@ -28,110 +44,159 @@ as_base ()
 
 # --- Basic setup ---------------------------------------------------------------------------------
 
-log_step "Running basic setup processes..."
+log_step 0 "Running basic setup processes..."
 
 sudo -n true
 set -euo pipefail
 
-# --- Base Packages -------------------------------------------------------------------------------
+# --- Packages  -----------------------------------------------------------------------------------
 
-log_step "Installing base packages from pacman..."
+log_step 0 "Installing packages from pacman..."
 
-pacman -S --noconfirm git curl
+pacman_install ()
+{
+  log_list $1 "$2"
+  pacman -Sq --noconfirm $2 &> /dev/null
+}
+
+packages=( git xorg-server make cmake emacs xmonad xmonad-contrib xmobar fish picom nitrogen lightdm alacritty xterm dmenu dunst tldr man exa procs bat ripgrep fd neofetch trayer lxsession network-manager-applet )
+
+for i in "${packages[@]}"
+do
+  pacman_install 1 $i
+done
 
 # --- Creating work directory ---------------------------------------------------------------------
 
-log_step "Creating working directory for script..."
+log_step 0 "Creating working directory for script..."
 
 cd $base_home
 rm -rf arch_setup
 as_base "mkdir arch_setup"
 cd arch_setup
 
-as_base "git clone https://github.com/Tetrago/dotfiles.git"
+log_step 1 "Cloning dotfiles repository..."
+as_base "git clone -q https://github.com/Tetrago/dotfiles.git"
 
 # --- AUR -----------------------------------------------------------------------------------------
 
-log_step "Installing AUR helper..."
+log_step 0 "Installing AURs..."
+
+log_step 1 "Installing AUR helper..."
 
 if ! command -v yay &> /dev/null
 then
-  as_base "git clone https://aur.archlinux.org/yay.git"
+  log_list 2 "Cloning 'yay' repository"
+  as_base "git clone -q https://aur.archlinux.org/yay.git"
+
+  log_list 2 "Building"
   cd yay
   as_base "makepkg -si --noconfirm"
   cd ..
+
+  log_list 2 "Cleaning"
   rm -rf yay
 else
-  log_step "'yay' found, skipping..."
+  log_list 2 "'yay' found, skipping..."
 fi
 
-log_step "Installing AUR packages..."
+log_step 1 "Installing AUR packages..."
 
-as_base "yay -S --noconfirm caffeine-ng neovim-symlinks pnmixer batterymon-clone archlinux-wallpaper"
+yay_install ()
+{
+  log_list $1 "$2"
+  sudo -u $base_user yay -Sq --noconfirm $2 &> /dev/null
+}
 
-# --- Installing all packages ---------------------------------------------------------------------
+packages=( caffeine-ng neovim-symlinks pnmixer batterymon-clone archlinux-wallpaper google-chrome )
 
-log_step "Installing all packages..."
-
-pacman -S --noconfirm --needed xorg-server make cmake emacs xmonad xmonad-contrib xmobar fish picom nitrogen lightdm alacritty xterm dmenu dunst tldr man exa procs bat ripgrep fd fish neofetch trayer lxsession network-manager-applet
+for i in "${packages[@]}"
+do
+  yay_install 2 $i
+done
 
 # --- Confirguring lightdm ------------------------------------------------------------------------
 
-log_step "Configuring lightdm..."
+log_step 0 "Configuring lightdm..."
 
+log_list 1 "Enabling display manager"
 systemctl enable lightdm
-pacman -S --noconfirm --needed lightdm-webkit2-greeter lightdm-webkit-theme-litarvan
+
+log_list 1 "Installing packages"
+pacman_install 2 lightdm-webkit2-greeter
+pacman_install 2 lightdm-webkit-theme-litarvan
+
+log_list 1 "Modifing configuration"
 sed -i 's/greeter-session=.*/greeter-session=lightdm-webkit2-greeter/g' /etc/lightdm/lightdm.conf
 sed -i 's/#greeter-session=.*/greeter-session=lightdm-webkit2-greeter/g' /etc/lightdm/lightdm.conf
 sed -i 's/webkit_theme.*/webkit_theme=litarvan/g' /etc/lightdm/lightdm-webkit2-greeter.conf
 
 # --- Replicating configuration ------------------------------------------------------------------
 
-log_step "Replicating configuration..."
+log_step 0 "Replicating configuration..."
 
+log_list 1 "Changing shell"
 chsh -s /bin/fish $base_user
+
+log_list 1 "Creating file structure"
 as_base "mkdir -p $base_home/.xmonad"
 as_base "mkdir -p $base_home/.config/fish"
+
+log_list 1 "Copying configuration files"
 as_base "cp dotfiles/.xmobarrc $base_home/"
 as_base "cp dotfiles/.xmonad/xmonad.hs $base_home/.xmonad/"
 as_base "cp dotfiles/.config/fish/config.fish $base_home/.config/fish/"
 
 # --- Installing SpaceVim -------------------------------------------------------------------------
 
-log_step "Installiong SpaceVim..."
+log_step 0 "Installiong SpaceVim..."
 
 sudo -u $base_user curl -sLf https://spacevim.org/install.sh | sudo -u $base_user bash
 
 # --- Installing Doom Emacs -----------------------------------------------------------------------
 
-log_step "Installing Doom Emacs..."
+log_step 0 "Installing Doom Emacs..."
 
-as_base "git clone --depth 1 https://github.com/hlissner/doom-emacs $base_home/.emacs.d"
-as_base "$base_home/.emacs.d/bin/doom -y install"
+if [ ! -d "$base_home/.doom.d" ]
+then
+  log_list 1 "Cloning"
+  as_base "git clone -q --depth 1 https://github.com/hlissner/doom-emacs $base_home/.emacs.d"
 
-init_el="$base_home/.doom.d/init.el"
+  log_list 1 "Installing"
+  as_base "$base_home/.emacs.d/bin/doom -y install"
 
-sed -i 's/;;vterm/vterm/' ${init_el}
-sed -i 's/;;make/make/' ${init_el}
-sed -i 's/;;cc/cc/' ${init_el}
-sed -i 's/;;csharp/csharp/' ${init_el}
-sed -i 's/;;json/json/' ${init_el}
-sed -i 's/;;javascript/javascript/' ${init_el}
-sed -i 's/;;lua/lua/' ${init_el}
-sed -i 's/;;php/php/' ${init_el}
-sed -i 's/;;python/python/' ${init_el}
-sed -i 's/;;rust/rust/' ${init_el}
-sed -i 's/;;yaml/yaml/' ${init_el}
+  init_el="$base_home/.doom.d/init.el"
 
-as_base "$base_home/.emacs.d/bin/doom -y sync"
+  log_list 1 "Modifing configuration"
+  sed -i 's/;;vterm/vterm/' ${init_el}
+  sed -i 's/;;make/make/' ${init_el}
+  sed -i 's/;;cc/cc/' ${init_el}
+  sed -i 's/;;csharp/csharp/' ${init_el}
+  sed -i 's/;;json/json/' ${init_el}
+  sed -i 's/;;javascript/javascript/' ${init_el}
+  sed -i 's/;;lua/lua/' ${init_el}
+  sed -i 's/;;php/php/' ${init_el}
+  sed -i 's/;;python/python/' ${init_el}
+  sed -i 's/;;rust/rust/' ${init_el}
+  sed -i 's/;;yaml/yaml/' ${init_el}
+
+  log_list 1 "Syncing"
+  as_base "$base_home/.emacs.d/bin/doom -y sync"
+else
+  log_step 1 "'.doom.d' found, skipping"
+fi
 
 # --- Finializing setup process -------------------------------------------------------------------
 
-log_step "Finializing setup..."
+log_step 0 "Finializing setup..."
 
 cd ..
 rm -rf arch_setup
 
 # --- Done ----------------------------------------------------------------------------------------
 
-log_step "arch_setup completed!"
+echo -e "          _                                 _     _       "
+echo -e "  ___ ___| |_ _  _ _ __   __ ___ _ __  _ __| |___| |_ ___ "
+echo -e " (_-</ -_)  _| || | '_ \ / _/ _ \ '  \| '_ \ / -_)  _/ -_)"
+echo -e " /__/\___|\__|\_,_| .__/ \__\___/_|_|_| .__/_\___|\__\___|"
+echo -e "                  |_|                 |_|                 "
