@@ -8,8 +8,6 @@ echo -e "(____  /__|    \___  >___|  /____/____  >\___  >__| |____/|   __/ "
 echo -e "     \/            \/     \/_____/    \/     \/           |__|    "
 echo ""
 
-# --- Script startup ------------------------------------------------------------------------------
-
 base_user=${SUDO_USER:-${USER}}
 base_home=$(eval echo ~$base_user)
 
@@ -56,10 +54,10 @@ log_step 0 "Installing packages from pacman..."
 pacman_install ()
 {
   log_list $1 "$2"
-  pacman -Sq --noconfirm $2 &> /dev/null
+  pacman -Sq --noconfirm --needed $2 &> /dev/null
 }
 
-packages=( git xorg-server make cmake emacs xmonad xmonad-contrib xmobar fish picom nitrogen lightdm alacritty xterm dmenu dunst tldr man exa procs bat ripgrep fd neofetch trayer lxsession network-manager-applet )
+packages=( neovim git base-devel xorg-server make cmake emacs xmonad xmonad-contrib xmobar fish picom nitrogen lightdm alacritty xterm dmenu dunst tldr man exa procs bat ripgrep fd neofetch trayer lxsession network-manager-applet )
 
 for i in "${packages[@]}"
 do
@@ -91,11 +89,8 @@ then
 
   log_list 2 "Building"
   cd yay
-  as_base "makepkg -si --noconfirm"
+  sudo -u $base_user makepkg -si --noconfirm &> /dev/null
   cd ..
-
-  log_list 2 "Cleaning"
-  rm -rf yay
 else
   log_list 2 "'yay' found, skipping..."
 fi
@@ -120,7 +115,7 @@ done
 log_step 0 "Configuring lightdm..."
 
 log_list 1 "Enabling display manager"
-systemctl enable lightdm
+systemctl enable lightdm &> /dev/null
 
 log_list 1 "Installing packages"
 pacman_install 2 lightdm-webkit2-greeter
