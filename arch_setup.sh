@@ -106,10 +106,10 @@ sudo -u $base_user curl -sLf https://spacevim.org/install.sh | sudo -u $base_use
 
 log_step "Installing Doom Emacs..."
 
-as_base "git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d"
-as_base "~/.emacs.d/bin/doom -y install"
+as_base "git clone --depth 1 https://github.com/hlissner/doom-emacs $base_home/.emacs.d"
+as_base "$base_home/.emacs.d/bin/doom -y install"
 
-init_el="${base_home}/.doom.d/init.el"
+init_el="$base_home/.doom.d/init.el"
 
 sed -i 's/;;vterm/vterm/' ${init_el}
 sed -i 's/;;make/make/' ${init_el}
@@ -123,7 +123,7 @@ sed -i 's/;;python/python/' ${init_el}
 sed -i 's/;;rust/rust/' ${init_el}
 sed -i 's/;;yaml/yaml/' ${init_el}
 
-as_base "~/.emacs.d/bin/doom -y sync"
+as_base "$base_home/.emacs.d/bin/doom -y sync"
 
 # --- Finializing setup process -------------------------------------------------------------------
 
