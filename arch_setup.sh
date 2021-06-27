@@ -90,8 +90,8 @@ sed -i 's/webkit_theme.*/webkit_theme=litarvan/g' /etc/lightdm/lightdm-webkit2-g
 log_step "Replicating configuration..."
 
 chsh -s /bin/fish $base_user
-as_base "mkdir .xmonad"
-as_base "mkdir -p .config/fish"
+as_base "mkdir -p $base_home/.xmonad"
+as_base "mkdir -p $base_home/.config/fish"
 as_base "cp dotfiles/.xmobarrc $base_home/"
 as_base "cp dotfiles/.xmonad/xmonad.hs $base_home/.xmonad/"
 as_base "cp dotfiles/.config/fish/config.fish $base_home/.config/fish/"
