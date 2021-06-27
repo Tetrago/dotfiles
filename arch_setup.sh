@@ -67,7 +67,7 @@ fi
 
 log_step "Installing AUR packages..."
 
-as_base "yay -S --noconfirm caffeine-ng neovim-symlinks pnmixer batterymon-clone"
+as_base "yay -S --noconfirm caffeine-ng neovim-symlinks pnmixer batterymon-clone archlinux-wallpaper"
 
 # --- Installing all packages ---------------------------------------------------------------------
 
