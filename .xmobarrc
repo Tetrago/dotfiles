@@ -13,5 +13,5 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                           ]
           , sepChar = "%"
           , alignSep = "}{"
-          , template = "%cpu% | %memory% * %swap% | %multicoretemp%}<fc=#2af5ff>%date%</fc> %time%{"
+          , template = "%cpu% | %memory% * %swap% | %multicoretemp%}<fc=#3ec5bb>%date%</fc> %time%{"
           }
