@@ -138,9 +138,11 @@ as_base "mkdir -p $base_home/.xmonad"
 as_base "mkdir -p $base_home/.config/fish"
 
 log_list 1 "Copying configuration files"
+as_base "cp dotfiles/.config/alacritty/alacritty.yml $base_home/.config/alacritty/alacritty.yml"
+as_base "cp dotfiles/.config/dmscripts/config $base_home/.config/dmscripts/config"
+as_base "cp dotfiles/.config/fish/config.fish $base_home/.config/fish/"
 as_base "cp dotfiles/.xmobarrc $base_home/"
 as_base "cp dotfiles/.xmonad/xmonad.hs $base_home/.xmonad/"
-as_base "cp dotfiles/.config/fish/config.fish $base_home/.config/fish/"
 
 # --- Installing SpaceVim -------------------------------------------------------------------------
 
