@@ -40,7 +40,6 @@ log_list ()
 
 log_step 0 "Running basic setup processes..."
 
-sudo -n true
 set -euo pipefail
 
 # --- Syncing system clock ------------------------------------------------------------------------
@@ -99,7 +98,7 @@ sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers
 # --- Boot ----------------------------------------------------------------------------------------
 
 log_step 0 "Installing GRUB..."
-pacman -Sq --noconfirm --needed grub &> /dev/null
+pacman -Sq --noconfirm grub &> /dev/null
 
 # --- Done ----------------------------------------------------------------------------------------
 
