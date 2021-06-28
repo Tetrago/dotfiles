@@ -8,9 +8,12 @@ Go through the basic installation process for Arch:
 1. Check for UEFI boot: `ls /sys/firmware/efi/efivars`
 2. `timedatectl set-ntp true`
 3. Partition your drive(s)
-    - mkfs.ext4
-    - mkswap
-    - swapon
+    - Create the filesystems
+        - mkfs.ext4
+        - mkswap
+        - swapon
+     - Make sure to create 550M EFI partition if booting with UEFI
+        - mkfs.fat -F32
 4. `mount /dev/root_partition /mnt`
 5. `pacstrap /mnt base linux linux-firmware`
 6. `genfstab -U /mnt >> /mnt/etc/fstab`
@@ -30,9 +33,19 @@ Setup users:
 4. `passwd [user]`
 
 Setup grub:
-1. `grub-install /dev/sda`
-    - This may vary when using UEFI
-2. `grub-mkconfig -o /boot/grub/grub.cfg`
+
+- BIOS
+    1. `grub-install /dev/sda`
+        - This may vary when using UEFI
+    2. `grub-mkconfig -o /boot/grub/grub.cfg`
+
+- UEFI
+    1. Install `efibootmgr`, `dosfstools`, `os-prober`, and `mtools`
+    2. `mkdir /boot/EFI`
+    3. `mount /dev/efi_partition /boot/EFI`
+    4. `grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck`
+    5. `grub-mkconfig -o /boot/grub/grub.cfg`
+    6. `umount /boot/EFI`
 
 Quit:
 1. `exit`
