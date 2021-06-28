@@ -103,7 +103,7 @@ yay_install ()
   sudo -u $base_user yay -Sq --noconfirm $2 &> /dev/null
 }
 
-packages=( caffeine-ng neovim-symlinks pnmixer batterymon-clone archlinux-wallpaper google-chrome dtrx )
+packages=( caffeine-ng neovim-symlinks pnmixer batterymon-clone archlinux-wallpaper google-chrome dtrx dmscripts-git shell-color-scripts )
 
 for i in "${packages[@]}"
 do

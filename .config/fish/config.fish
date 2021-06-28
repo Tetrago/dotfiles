@@ -10,4 +10,4 @@ alias mv="mv -i"
 alias cp="cp -i"
 alias tar="dtrx"
 
-neofetch
+colorscript random | tail -n +2
