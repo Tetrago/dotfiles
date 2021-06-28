@@ -9,7 +9,7 @@
 
 import XMonad
 import XMonad.Hooks.ManageDocks
-import XMonad.Layouts.Spacing
+import XMonad.Layout.Spacing
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import Data.Monoid
