@@ -100,8 +100,6 @@ sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers
 log_step 0 "Installing GRUB..."
 pacman -Sq --noconfirm grub &> /dev/null
 
-# --- Done ----------------------------------------------------------------------------------------
-
 echo ""
 echo -e "  _         _        _ _                     _     _       "
 echo -e " (_)_ _  __| |_ __ _| | |  __ ___ _ __  _ __| |___| |_ ___ "
