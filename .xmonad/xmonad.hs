@@ -9,9 +9,11 @@
 
 import XMonad
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
+import XMonad.Hooks.EwmhDesktops
 import Data.Monoid
 import System.Exit
 
@@ -185,7 +187,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = spacingRaw False (Border 2 2 2 2) True (Border 2 2 2 2) True $ avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = spacingRaw False (Border 2 2 2 2) True (Border 2 2 2 2) True $ smartBorders $ avoidStruts (tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -229,7 +231,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+myEventHook = fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -265,7 +267,7 @@ myStartupHook = do
 --
 main = do
   xmproc <- spawnPipe "xmobar"
-  xmonad $ docks defaults
+  xmonad $ ewmh $ docks defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
