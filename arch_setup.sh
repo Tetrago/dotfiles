@@ -163,6 +163,7 @@ then
   init_el="$base_home/.doom.d/init.el"
 
   log_list 1 "Modifing configuration"
+  sed -i 's/;;neotree/neotree/' ${init_el}
   sed -i 's/;;vterm/vterm/' ${init_el}
   sed -i 's/;;make/make/' ${init_el}
   sed -i 's/;;cc/cc/' ${init_el}
