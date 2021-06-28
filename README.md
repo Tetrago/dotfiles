@@ -57,3 +57,5 @@ Quit:
 After rebooting, execute the setup script:
 
 `curl -sLf https://raw.githubusercontent.com/Tetrago/dotfiles/master/arch_setup.sh | sudo bash`
+
+Beware that XDG Autostart make cause tray icons to run twice. [Arch Wiki](https://wiki.archlinux.org/title/XDG_Autostart)
