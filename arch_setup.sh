@@ -131,7 +131,7 @@ sed -i 's/webkit_theme.*/webkit_theme=litarvan/g' /etc/lightdm/lightdm-webkit2-g
 log_step 0 "Replicating configuration..."
 
 log_list 1 "Changing shell"
-chsh -s /bin/fish $base_user
+chsh -s /bin/fish $base_user &> /dev/null
 
 log_list 1 "Creating file structure"
 as_base "mkdir -p $base_home/.xmonad"
