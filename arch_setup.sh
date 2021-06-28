@@ -57,7 +57,7 @@ pacman_install ()
   pacman -Sq --noconfirm --needed $2 &> /dev/null
 }
 
-packages=( neovim git base-devel xorg-server make cmake emacs xmonad xmonad-contrib xmobar fish picom nitrogen lightdm alacritty xterm dmenu dunst tldr man exa procs bat ripgrep fd neofetch trayer lxsession network-manager-applet )
+packages=( neovim git base-devel xorg-server make cmake emacs xmonad xmonad-contrib xmobar fish picom nitrogen lightdm alacritty xterm dmenu dunst tldr man exa procs bat ripgrep fd neofetch trayer lxsession network-manager-applet pcmanfm-gtk3 lxappearance )
 
 for i in "${packages[@]}"
 do
@@ -103,7 +103,7 @@ yay_install ()
   sudo -u $base_user yay -Sq --noconfirm $2 &> /dev/null
 }
 
-packages=( caffeine-ng neovim-symlinks pnmixer batterymon-clone archlinux-wallpaper google-chrome )
+packages=( caffeine-ng neovim-symlinks pnmixer batterymon-clone archlinux-wallpaper google-chrome dtrx )
 
 for i in "${packages[@]}"
 do

@@ -7,6 +7,6 @@ alias la="exa --oneline --all"
 alias ll="exa --oneline --all --long"
 alias mv="mv -i"
 alias cp="cp -i"
-alias clip="xclip -selection clipboard"
+alias tar="dtrx"
 
 neofetch
