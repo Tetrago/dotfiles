@@ -6,9 +6,9 @@ alias cat="bat"
 alias la="exa --1la --group-directories-first --color=always"
 alias mv="mv -i"
 alias cp="cp -i"
-alias tar="dtrx"
+alias aur="dtrx"
 alias dotfiles="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
-colorscript random | tail -n +2
+colorscript random
 
 starship init fish | source
