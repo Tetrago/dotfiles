@@ -251,9 +251,10 @@ myLogHook = return ()
 -- By default, do nothing.
 myStartupHook = do
   spawnOnce "lxsession &"
+  spawnOnce "pcmanfm -d &"
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom &"
-  spawnOnce "xfce4-power-manager"
+  spawnOnce "xfce4-power-manager &"
   spawnOnce "nm-applet &"
   spawnOnce "pnmixer &"
   spawnOnce "caffeine &"
