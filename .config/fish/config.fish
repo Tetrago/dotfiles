@@ -3,7 +3,9 @@ set -x EDITOR vim
 
 alias ps="procs"
 alias cat="bat"
-alias la="exa --1la --group-directories-first --color=always"
+alias ls="exa --1la --group-directories-first --color=always"
+alias la="exa --1a --group-directories-first --color=always"
+alias ll="exa --1l --group-directories-first --color=always"
 alias mv="mv -i"
 alias cp="cp -i"
 alias aur="dtrx"
