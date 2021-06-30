@@ -278,7 +278,6 @@ myStartupHook = do
   spawnOnce "xfce4-power-manager &"
   spawnOnce "nm-applet &"
   spawnOnce "pnmixer &"
-  spawnOnce "caffeine &"
   spawnOnce "dunst &"
   spawnOnce "trayer --edge top --align right --width 15 --height 17 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x000000 &"
 
