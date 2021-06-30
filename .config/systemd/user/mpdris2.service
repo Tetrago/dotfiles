@@ -1,0 +1,11 @@
+[Unit]
+Description=Music Player Daemon playerctl compatbility layer
+
+[Service]
+ExecStart=mpDris2
+ExecStop=pkill mpDris2
+After=mpd.service
+Wants=mpd.service
+
+[Install]
+WantedBy=default.target
