@@ -15,6 +15,7 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.EwmhDesktops
 import Data.Monoid
+import Graphics.X11.ExtraTypes.XF86
 import System.Exit
 
 import qualified XMonad.StackSet as W
@@ -155,6 +156,26 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    ++
+
+    -- Mute volume
+    [((0, xF86XK_AudioMute), spawn $ "amixer -q set Master toggle")
+
+    -- Increase Volume
+    , ((0, xF86XK_AudioRaiseVolume), spawn $ "amixer -q set Master 5%+")
+
+    -- Decrease Volume
+    , ((0, xF86XK_AudioLowerVolume), spawn $ "amixer -q set Master 5%-")
+
+    -- Increase brightness
+    , ((0, xF86XK_MonBrightnessUp), spawn $ "xbacklight -inc 5")
+
+    -- Decrease brightness
+    , ((0, xF86XK_MonBrightnessDown), spawn $ "xbacklight -dec 5")
+
+    , ((0, xF86XK_AudioPlay), spawn $ "playerctl play-pause")
+    , ((0, xF86XK_AudioNext), spawn $ "playerctl next")
+    , ((0, xF86XK_AudioPrev), spawn $ "playerctl previous")]
 
 
 ------------------------------------------------------------------------
