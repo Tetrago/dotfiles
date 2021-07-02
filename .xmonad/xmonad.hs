@@ -8,12 +8,18 @@
 --
 
 import XMonad
-import XMonad.Hooks.ManageDocks
+
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
+
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
+
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+
 import Data.Monoid
 import Graphics.X11.ExtraTypes.XF86
 import System.Exit
@@ -174,6 +180,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     --, ((0, xF86XK_MonBrightnessDown), spawn $ "xbacklight -dec 5")
 
     , ((0, xF86XK_AudioPlay), spawn $ "playerctl play-pause")
+    , ((0, xF86XK_AudioStop), spawn $ "playerctl stop")
     , ((0, xF86XK_AudioNext), spawn $ "playerctl next")
     , ((0, xF86XK_AudioPrev), spawn $ "playerctl previous")]
 
@@ -241,7 +248,9 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore
+    , isFullscreen --> doFullFloat
+    ]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -252,15 +261,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = fullscreenEventHook
-
-------------------------------------------------------------------------
--- Status bars and logging
-
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'XMonad.Hooks.DynamicLog' extension for examples.
---
-myLogHook = return ()
+myEventHook = docksEventHook <+> fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -271,6 +272,7 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 myStartupHook = do
+  spawnOnce "numlockx on"
   spawnOnce "lxsession &"
   spawnOnce "picom &"
   spawnOnce "pcmanfm -d &"
@@ -279,7 +281,7 @@ myStartupHook = do
   spawnOnce "nm-applet &"
   spawnOnce "pnmixer &"
   spawnOnce "dunst &"
-  spawnOnce "trayer --edge top --align right --width 15 --height 17 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x000000 &"
+  spawnOnce "stalonetray &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -287,16 +289,12 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  xmproc <- spawnPipe "xmobar"
-  xmonad $ ewmh $ docks defaults
+  xmproc0 <- spawnPipe "xmobar -x 0"
+  xmproc1 <- spawnPipe "xmobar -x 1"
+  xmproc2 <- spawnPipe "xmobar -x 2"
 
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = def {
+  xmonad $ ewmh def
+    {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -313,9 +311,20 @@ defaults = def {
 
       -- hooks, layouts
         layoutHook         = myLayout,
-        manageHook         = myManageHook,
+        manageHook         = myManageHook <+> manageDocks,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook,
+        logHook            = xmobarPP
+          { ppOutput = \x -> hPutStrLn xmproc0 x
+                          >> hPutStrLn xmproc1 x
+                          >> hPutStrLn xmproc2 x
+          , ppCurrent = xmobarColor myFocusedBorderColor "" . wrap "[" "]"
+          , ppVisible = xmobarColor myFocusedBorderColor "" . wrap " " " "
+          , ppHidden = xmobarColor myNormalBorderColor "" . wrap "*" " "
+          , ppHiddenNoWindows = xmobarColor myNormalBorderColor "" . wrap " " " "
+          , ppTitle = xmobarColor myFocusedBorderColor "" . shorten 60
+          , ppSep = " | "
+          , ppOrder = \(ws:_:t:_) -> [ws, t]
+          },
         startupHook        = myStartupHook
     }
 
