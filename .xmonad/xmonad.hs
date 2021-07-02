@@ -284,6 +284,11 @@ myStartupHook = do
   spawnOnce "stalonetray &"
 
 ------------------------------------------------------------------------
+-- Helpers
+
+clickable ws = "<action=xdotool key super+" ++ show ws ++ ">" ++ ws ++ "</action>"
+
+------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
 
 -- Run xmonad with the settings you specify. No need to modify this.
@@ -313,14 +318,14 @@ main = do
         layoutHook         = myLayout,
         manageHook         = myManageHook <+> manageDocks,
         handleEventHook    = myEventHook,
-        logHook            = xmobarPP
+        logHook            = dynamicLogWithPP $ xmobarPP
           { ppOutput = \x -> hPutStrLn xmproc0 x
                           >> hPutStrLn xmproc1 x
                           >> hPutStrLn xmproc2 x
           , ppCurrent = xmobarColor myFocusedBorderColor "" . wrap "[" "]"
-          , ppVisible = xmobarColor myFocusedBorderColor "" . wrap " " " "
-          , ppHidden = xmobarColor myNormalBorderColor "" . wrap "*" " "
-          , ppHiddenNoWindows = xmobarColor myNormalBorderColor "" . wrap " " " "
+          , ppVisible = xmobarColor myFocusedBorderColor "" . wrap " " " " . clickable
+          , ppHidden = xmobarColor myNormalBorderColor "" . wrap "*" " " . clickable
+          , ppHiddenNoWindows = xmobarColor myNormalBorderColor "" . wrap " " " " . clickable
           , ppTitle = xmobarColor myFocusedBorderColor "" . shorten 60
           , ppSep = " | "
           , ppOrder = \(ws:_:t:_) -> [ws, t]
