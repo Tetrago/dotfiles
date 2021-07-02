@@ -168,10 +168,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((0, xF86XK_AudioMute), spawn $ "amixer -q set Master toggle")
 
     -- Increase Volume
-    , ((0, xF86XK_AudioRaiseVolume), spawn $ "amixer -q set Master 5%+")
+    , ((0, xF86XK_AudioRaiseVolume), spawn $ "amixer -q set Master 2%+")
 
     -- Decrease Volume
-    , ((0, xF86XK_AudioLowerVolume), spawn $ "amixer -q set Master 5%-")
+    , ((0, xF86XK_AudioLowerVolume), spawn $ "amixer -q set Master 2%-")
 
     -- Managed by xfce4-power-manager
     -- Increase brightness
