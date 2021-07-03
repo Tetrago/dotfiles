@@ -20,7 +20,7 @@ DMEDITOR="${DMTERM} vim"
 # DMEDITOR="${DMTERM} -e nvim"
 
 # dm-logout
-logout_locker='slock'
+logout_locker='i3lock-fancy'
 # logout_locker='dm-tool lock'
 
 # dm-bookman 

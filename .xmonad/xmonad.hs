@@ -9,6 +9,8 @@
 
 import XMonad
 
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 
@@ -105,6 +107,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Move focus to the master window
     , ((modm,               xK_m     ), windows W.focusMaster  )
 
+    -- Switch to monocle layout
+    , ((modm .|. shiftMask, xK_m     ), sendMessage $ Toggle FULL)
+
     -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
 
@@ -182,7 +187,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0, xF86XK_AudioPlay), spawn $ "playerctl play-pause")
     , ((0, xF86XK_AudioStop), spawn $ "playerctl stop")
     , ((0, xF86XK_AudioNext), spawn $ "playerctl next")
-    , ((0, xF86XK_AudioPrev), spawn $ "playerctl previous")]
+    , ((0, xF86XK_AudioPrev), spawn $ "playerctl previous")
+    
+    , ((modm, xF86XK_AudioPlay), spawn $ "playerctl -p mpd play-pause")
+    , ((modm, xF86XK_AudioStop), spawn $ "playerctl -p mpd stop")
+    , ((modm, xF86XK_AudioNext), spawn $ "playerctl -p mpd next")
+    , ((modm, xF86XK_AudioPrev), spawn $ "playerctl -p mpd previous")]
+    ++
+
+    [((modm, xK_c), spawn "google-chrome-stable")
+    , ((modm, xK_o), spawn "pcmanfm")]
 
 
 ------------------------------------------------------------------------
@@ -215,7 +229,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = spacingRaw False (Border 2 2 2 2) True (Border 2 2 2 2) True $ smartBorders $ avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = smartBorders $ mySpacingRaw 2 $ avoidStruts $ mkToggle (FULL ?? EOT) $ (tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -272,7 +286,7 @@ myEventHook = docksEventHook <+> fullscreenEventHook
 --
 -- By default, do nothing.
 myStartupHook = do
-  spawnOnce "numlockx on"
+  spawnOnce "numlockx on &"
   spawnOnce "lxsession &"
   spawnOnce "picom &"
   spawnOnce "pcmanfm -d &"
@@ -281,12 +295,13 @@ myStartupHook = do
   spawnOnce "nm-applet &"
   spawnOnce "pnmixer &"
   spawnOnce "dunst &"
-  spawnOnce "stalonetray &"
+  spawnOnce "trayer --edge top --align right --width 15 --height 17 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x000000 &"
 
 ------------------------------------------------------------------------
 -- Helpers
 
 clickable ws = "<action=xdotool key super+" ++ show ws ++ ">" ++ ws ++ "</action>"
+mySpacingRaw i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
