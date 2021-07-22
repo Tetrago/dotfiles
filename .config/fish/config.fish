@@ -9,6 +9,8 @@ alias ll="exa -1l --group-directories-first --color=always"
 alias mv="mv -i"
 alias cp="cp -i"
 alias aur="dtrx"
+alias yeet="yay -Rsn"
+alias pacrm="pacman -Rsn"
 alias dotfiles="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 colorscript random
