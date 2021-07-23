@@ -10,8 +10,6 @@ alias mv="mv -i"
 alias cp="cp -i"
 alias aur="dtrx"
 alias yeet="paru -Rsn"
-alias pacrm="pacman -Rsn"
-alias topgrade="paru -Syu"
 alias dotfiles="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 colorscript random
