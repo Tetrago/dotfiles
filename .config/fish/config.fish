@@ -9,8 +9,8 @@ alias ll="exa -1l --group-directories-first --color=always"
 alias mv="mv -i"
 alias cp="cp -i"
 alias aur="dtrx"
-alias yeet="paru -Rsn"
-alias topgrade="paru -Syu --noconfirm"
+alias yeet="paru -Rsn --noconfirm --sudoloop"
+alias topgrade="paru -Syu --noconfirm --sudoloop"
 alias dotfiles="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 colorscript random
