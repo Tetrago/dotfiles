@@ -286,15 +286,16 @@ myEventHook = docksEventHook <+> fullscreenEventHook
 --
 -- By default, do nothing.
 myStartupHook = do
-  spawnOnce "numlockx on &"
-  spawnOnce "lxsession &"
-  spawnOnce "picom &"
-  spawnOnce "pcmanfm -d &"
-  spawnOnce "nitrogen --restore &"
-  spawnOnce "xfce4-power-manager &"
-  spawnOnce "nm-applet &"
-  spawnOnce "pnmixer &"
-  spawnOnce "dunst &"
+--  spawnOnce "numlockx on &"
+--  spawnOnce "lxsession &"
+--  spawnOnce "picom &"
+--  spawnOnce "pcmanfm -d &"
+--  spawnOnce "nitrogen --restore &"
+--  spawnOnce "xfce4-power-manager &"
+--  spawnOnce "nm-applet &"
+--  spawnOnce "pnmixer &"
+--  spawnOnce "dunst &"
+  spawnOnce "~/.config/tetrago/autostart.sh &"
   spawnOnce "trayer --edge top --align right --width 15 --height 17 --SetDockType true --SetPartialStrut true --expand true --transparent true --alpha 0 --tint 0x000000 &"
 
 ------------------------------------------------------------------------
