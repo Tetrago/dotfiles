@@ -1,0 +1,17 @@
+set adjust-open "width"
+set pages-per-row 1
+
+map r reload
+map p print
+map i recolor
+map J zoom out
+map K zoom in
+map R rotate
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+
+set recolor             false
+set recolor-lightcolor  "#151515"
+set recolor-darkcolor   "#D7D0C7"
+set recolor-keephue     true
