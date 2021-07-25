@@ -1,0 +1,20 @@
+[bar/bspwm]
+modules-left = cpu memory temperature
+modules-center = date time
+separator = |
+tray-position = right
+tray-detached = false
+tray-maxiconsize = 16
+
+[module/cpu]
+type = internal/cpu
+
+[module/memory]
+type = internal/memory
+
+[module/temperature]
+type = internal/temperature
+
+[module/date]
+type = internal/date
+date = %a %b %d %Y %I:%M %p
