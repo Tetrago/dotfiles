@@ -20,11 +20,9 @@
 [settings]
 screenchange-reload = true
 
-
 [global/wm]
 margin-top = 0
 margin-bottom = 0
-
 
 [colors]
 ;background = ${xrdb:color0} 
@@ -47,30 +45,18 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 font-0 = FiraCode Nerd Font:size=10:antialias=true;1
 
-modules-center = cmus
-modules-right = updates cpu memory volume date
+;modules-center = mpd
+modules-right = updates temperature cpu memory volume date
 module-margin = 1
 
 tray-position = right
 tray-padding = 8
 tray-maxsize = 16
 
-
 [bar/bspwm]
 inherit = bar/common
 modules-left = bspwm xwindow
 wm-restack = bspwm
-
-
-[bar/i3]
-inherit = bar/common
-modules-left =  i3_ws i3_mode 
-;wm-restack = i3
-
-
-[bar/openbox]
-inherit = bar/common
-modules-left = polywins 
 
 
 # M O D U L E S
@@ -98,21 +84,6 @@ label-empty = ﱤ
 label-empty-foreground = ${colors.foreground}
 label-empty-padding = ${self.label-focused-padding}
 
-
-[module/cmus]
-type = custom/script
-exec = ~/.config/polybar/scripts/cmus.sh
-exec-if = pgrep -x cmus
-interval = 1
-label-maxlen = 75
-
-click-left = cmus-remote --next
-click-right = cmus-remote --prev
-click-middle = cmus-remote --pause
-scroll-up = cmus-remote --volume +10%
-scroll-down = cmus-remote --volume -10%
-
-
 [module/cpu]
 type = internal/cpu
 interval = 2
@@ -120,43 +91,12 @@ label = %percentage:2%
 format-prefix = " "
 format-prefix-foreground = ${colors.accent}
 
-
 [module/date]
 type = internal/date
 interval = 1
 date = "%a %d %b "
-time = "%H:%M "
+time = "%I:%M %p "
 label = %date% %time%
-
-
-[module/i3_mode]
-type = internal/i3
-format = <label-mode>
-label-mode-foreground = ${colors.urgent}
-
-
-[module/i3_ws]
-type = internal/i3
-format = <label-state>
-index-sort = true
-strip-wsnumbers = true
-
-label-focused = %index%
-label-focused-padding = 1
-label-focused-foreground = ${colors.accent}
-
-label-unfocused = %index%
-label-unfocused-padding = ${self.label-focused-padding}
-label-unfocused-foreground = ${colors.foreground}
-
-label-visible = %index%
-label-visible-padding = ${self.label-focused-padding}
-label-visible-foreground = ${colors.foreground}
-
-label-urgent = %index%
-label-urgent-padding = ${self.label-focused-padding}
-label-urgent-foreground = ${colors.urgent}
-
 
 [module/memory]
 type = internal/memory
@@ -164,15 +104,6 @@ interval = 2
 label = %percentage_used:2%
 format-prefix = "﬙ "
 format-prefix-foreground = ${colors.accent}
-
-
-[module/menu]
-type = custom/text
-content = " ﲵ "
-;content = " ﰪ "
-content-foreground = ${colors.foreground}
-click-left = dmenu_run
-
 
 [module/mpd]
 type = internal/mpd
@@ -186,15 +117,9 @@ icon-play = "契"
 icon-pause = ""
 icon-next = "怜"
 
-
-[module/polywins]
-type = custom/script
-exec = ~/.config/polybar/scripts/polywins.sh 2>/dev/null
-format = <label>
-label = %output%
-label-padding = 1
-tail = true
-
+[module/temperature]
+type = internal/temperature
+label = %temperature-c%
 
 [module/updates]
 type = custom/script
@@ -206,7 +131,6 @@ format-prefix-foreground = ${colors.accent}
 
 interval = 86400
 initial = 1
-
 
 [module/volume]
 type = internal/pulseaudio
