@@ -27,5 +27,5 @@
 *.color7      : #eeffff
 *.color15     : #ffffff
 
-*.accent      : #3ec5bb
-*.urgent      : #f07178
+*.accentColor : #3ec5bb
+*.urgentColor : #f07178
