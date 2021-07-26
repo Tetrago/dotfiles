@@ -23,4 +23,8 @@ bspc rule -a vlc                  state=floating center=true \
 $HOME/.config/tetrago/autostart.sh &
 $HOME/.config/polybar/start.sh &
 
-bsp-layout set tall
+bsp-layout set tall I -- --master-size 0.5
+bsp-layout set tall II -- --master-size 0.5
+bsp-layout set tall III -- --master-size 0.5
+bsp-layout set tall IV -- --master-size 0.5
+bsp-layout set tall V -- --master-size 0.5
