@@ -3,16 +3,33 @@
 #
 
 # terminal emulator
-super + shift + Return
+super + Return
 	alacritty
 
 # program launcher
-super + p
+super + @space
 	dmenu_run
 
 # make sxhkd reload its configuration files:
-super + Escape
+super + shift + Escape
 	pkill -USR1 -x sxhkd
+
+#
+# launch hotkeys
+#
+
+super + c
+  google-chrome-stable
+
+super + o
+  pcmanfm
+
+#
+# dm-script hotkeys
+#
+
+super + Escape
+  dm-logout
 
 #
 # bspwm hotkeys
@@ -23,11 +40,8 @@ super + alt + {q,r}
 	bspc {quit,wm -r}
 
 # close and kill
-super + shift + c
-  bspc node -c
-
-super + shift + w
-	bspc node -k
+super + {_,shift + }w
+	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
 super + m
