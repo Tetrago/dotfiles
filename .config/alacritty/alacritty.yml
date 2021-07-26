@@ -1,1 +1,28 @@
 background_opacity: 0.90
+colors:
+  # Default colors
+  primary:
+    background: '0x292d3e'
+    foreground: '0xbfc7d5'
+
+  # Normal colors
+  normal:
+    black:   '0x292d3e'
+    red:     '0xf07178'
+    green:   '0xc3e88d'
+    yellow:  '0xffcb6b'
+    blue:    '0x82aaff'
+    magenta: '0xc792ea'
+    cyan:    '0x60adec'
+    white:   '0xabb2bf'
+
+  # Bright colors
+  bright:
+    black:   '0x959dcb'
+    red:     '0xf07178'
+    green:   '0xc3e88d'
+    yellow:  '0xff5572'
+    blue:    '0x82aaff'
+    magenta: '0xffcb6b'
+    cyan:    '0x676e95'
+    white:   '0xfffefe'
