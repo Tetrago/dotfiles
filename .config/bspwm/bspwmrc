@@ -14,6 +14,7 @@ bspc config borderless_monocle    false
 bspc config gapless_monocle       false
 bspc config focus_follows_pointer true
 
+bspc rule -a \* node="@/2" splite_dir="south"
 bspc rule -a Lxappearance         state=floating
 bspc rule -a Nitrogen             state=floating
 bspc rule -a Pavucontrol          state=floating
