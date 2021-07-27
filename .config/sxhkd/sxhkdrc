@@ -136,3 +136,16 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#
+# media 
+#
+
+XF86Audio{Mute,RaiseVolume,LowerVolume}
+  amixer -q set Master {toggle,2%+,2%-}
+
+XF86Audio{Play,Stop,Next,Prev}
+  playerctl {play-pause,stop,next,previous}
+
+super + XF86Audio{Play,Stop,Next,Prev}
+  playerctl -p mpd {play-pause,stop,next,previous}
