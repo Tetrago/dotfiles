@@ -10,10 +10,17 @@ alias mv="mv -i"
 alias cp="cp -i"
 alias unar="dtrx"
 alias op="pcmanfm"
-alias parumk="paru -S --noconfirm --sudoloop"
-alias parurm="paru -Rsn --noconfirm --sudoloop"
-alias paruup="paru -Syu --noconfirm --sudoloop"
 alias dotfiles="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+
+if type -q paru
+  alias pak="paru -S --noconfirm --sudoloop"
+  alias yeet="paru -Rsn --noconfirm --sudoloop"
+  alias topgrade="paru -Syu --noconfirm --sudoloop"
+else if type -q pacman
+  alias pak="pacman -S --noconfirm"
+  alias yeet="pacman -Rsn --noconfirm"
+  alias topgrade="pacman -Syu --noconfirm"
+end
 
 colorscript random
 
