@@ -22,6 +22,6 @@ else if type -q pacman
   alias topgrade="pacman -Syu --noconfirm"
 end
 
-colorscript random
+neofetch
 
 starship init fish | source
