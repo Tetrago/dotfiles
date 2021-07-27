@@ -10,9 +10,9 @@ alias mv="mv -i"
 alias cp="cp -i"
 alias unar="dtrx"
 alias op="pcmanfm"
-alias pak="paru -S --noconfirm --sudoloop"
-alias yeet="paru -Rsn --noconfirm --sudoloop"
-alias topgrade="paru -Syu --noconfirm --sudoloop"
+alias parumk="paru -S --noconfirm --sudoloop"
+alias parurm="paru -Rsn --noconfirm --sudoloop"
+alias paruup="paru -Syu --noconfirm --sudoloop"
 alias dotfiles="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 colorscript random
