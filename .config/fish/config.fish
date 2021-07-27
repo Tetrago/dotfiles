@@ -10,7 +10,7 @@ alias mv="mv -i"
 alias cp="cp -i"
 alias dotfiles="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
-if type-q paru
+if type -q paru
   alias op="pcmanfm"
 end
 
