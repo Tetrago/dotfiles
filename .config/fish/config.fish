@@ -8,9 +8,11 @@ alias la="exa -1a --group-directories-first --color=always"
 alias ll="exa -1l --group-directories-first --color=always"
 alias mv="mv -i"
 alias cp="cp -i"
-alias unar="dtrx"
-alias op="pcmanfm"
 alias dotfiles="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+
+if type-q paru
+  alias op="pcmanfm"
+end
 
 if type -q paru
   alias pak="paru -S --noconfirm --sudoloop"
