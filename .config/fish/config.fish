@@ -39,4 +39,6 @@ end
 
 if type -q starship
   starship init fish | source
+else
+  echo "Skipping 'starship'..."
 end
