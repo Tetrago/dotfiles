@@ -33,6 +33,10 @@ else if type -q pacman
   alias topgrade="pacman -Syu --noconfirm"
 end
 
-neofetch
+if type -q neofetch
+  neofetch
+end
 
-starship init fish | source
+if type -q starship
+  starship init fish | source
+end
