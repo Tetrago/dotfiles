@@ -1,16 +1,27 @@
 set fish_greeting
 set -x EDITOR vim
 
-alias ps="procs"
-alias cat="bat"
-alias ls="exa -1la --group-directories-first --color=always"
-alias la="exa -1a --group-directories-first --color=always"
-alias ll="exa -1l --group-directories-first --color=always"
 alias mv="mv -i"
 alias cp="cp -i"
-alias unar="dtrx"
-alias op="pcmanfm"
 alias dotfiles="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+
+if type -q procs
+  alias ps="procs"
+end
+
+if type -q bat
+  alias cat="bat"
+end
+
+if type -q exa
+  alias ls="exa -1la --group-directories-first --color=always"
+  alias la="exa -1a --group-directories-first --color=always"
+  alias ll="exa -1l --group-directories-first --color=always"
+end
+
+if type -q pcmanfm
+  alias op="pcmanfm"
+end
 
 if type -q paru
   alias pak="paru -S --noconfirm --sudoloop"
@@ -22,6 +33,12 @@ else if type -q pacman
   alias topgrade="pacman -Syu --noconfirm"
 end
 
-neofetch
+if type -q neofetch
+  neofetch
+end
 
-starship init fish | source
+if type -q starship
+  starship init fish | source
+else
+  echo "Skipping 'starship'..."
+end
