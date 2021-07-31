@@ -47,7 +47,7 @@ font-0 = FiraCode Nerd Font:size=10:antialias=true;1
 
 ;modules-center = mpd
 modules-center = date
-modules-right = updates temperature cpu memory volume
+modules-right = temperature cpu memory volume
 module-margin = 1
 
 tray-position = right
@@ -121,14 +121,6 @@ icon-next = "怜"
 [module/temperature]
 type = internal/temperature
 label = %temperature-c%
-
-[module/updates]
-type = custom/script
-exec = pacman -Qu | wc -l
-label = %output%
-click-left = upgradepkg
-format-prefix = " "
-format-prefix-foreground = ${colors.accent}
 
 interval = 86400
 initial = 1
