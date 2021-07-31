@@ -14,9 +14,9 @@ if type -q bat
 end
 
 if type -q exa
-  alias ls="exa -1la --group-directories-first --color=always"
+  alias ls="exa -la --group-directories-first --color=always"
   alias la="exa -1a --group-directories-first --color=always"
-  alias ll="exa -1l --group-directories-first --color=always"
+  alias ll="exa -l --group-directories-first --color=always"
 end
 
 if type -q pcmanfm
