@@ -31,6 +31,10 @@ else if type -q pacman
   alias pak="pacman -S --noconfirm"
   alias yeet="pacman -Rsn --noconfirm"
   alias topgrade="pacman -Syu --noconfirm"
+else if type -q emerger
+  alias pak="emerge"
+  alias yeet="emerge --deselect"
+  alias topgrade="emerge --deep @world"
 end
 
 if type -q neofetch
