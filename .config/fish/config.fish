@@ -10,7 +10,7 @@ if type -q procs
 end
 
 if type -q bat
-  alias cat="bat"
+  alias cat="bat --paging=never"
 end
 
 if type -q exa
