@@ -47,7 +47,7 @@ font-0 = FiraCode Nerd Font:size=10:antialias=true;1
 
 ;modules-center = mpd
 modules-center = date
-modules-right = temperature cpu memory volume
+modules-right = temperature cpu memory battery volume
 module-margin = 1
 
 tray-position = right
@@ -61,6 +61,25 @@ wm-restack = bspwm
 
 
 # M O D U L E S
+
+[module/battery]
+type = internal/battery
+
+battery = BAT0
+adapter = ADAC
+
+format-charging = %{A1:$HOME/.config/rofi/bin/applet_battery:}<ramp-capacity><label-charging>%{A}
+format-discharging = %{A1:$HOME/.config/rofi/bin/applet_battery:}<ramp-capacity> %{A}
+
+label-charging = 
+label-charging-foreground = ${colors.accent}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.accent}
 
 [module/bspwm]
 type = internal/bspwm
@@ -121,6 +140,8 @@ icon-next = "怜"
 [module/temperature]
 type = internal/temperature
 label = %temperature-c%
+format-prefix = " "
+format-prefix-foreground = ${colors.accent}
 
 interval = 86400
 initial = 1
@@ -130,8 +151,8 @@ type = internal/pulseaudio
 ;sink = alsa_output.pci-0000_12_00.3.analog-stereo
 use-ui-max = false
 
-label-volume = %percentage:2%
-label-muted = %percentage:2%
+label-volume = %{A3:pavucontrol:}%percentage:2%%{A}
+label-muted = %{A3:pavucontrol:}%percentage:2%%{A}
 
 ramp-volume-0 = "奄"
 ramp-volume-1 = "奔"
