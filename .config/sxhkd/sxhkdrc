@@ -8,15 +8,15 @@ super + Return
 
 # program launcher
 super + @space
-	rofi -show drun
+	$HOME/.config/rofi/bin/launcher_colorful
+
+# powermenu
+super + Escape
+  $HOME/.config/rofi/bin/android_powermenu
 
 # make sxhkd reload its configuration files:
 super + shift + Escape
 	pkill -USR1 -x sxhkd
-
-# lock
-super + l
-  dm-tool lock
 
 # screenshot
 Print
