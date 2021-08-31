@@ -73,6 +73,8 @@ format-discharging = %{A3:$HOME/.config/rofi/bin/applet_battery:}<ramp-capacity>
 
 label-charging = 
 label-charging-foreground = ${colors.accent}
+label-full = 
+label-full-foreground = ${colors.accent}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
