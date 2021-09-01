@@ -23,20 +23,6 @@ if type -q pcmanfm
   alias op="pcmanfm"
 end
 
-if type -q paru
-  alias pak="paru -S --noconfirm --sudoloop"
-  alias yeet="paru -Rsn --noconfirm --sudoloop"
-  alias topgrade="paru -Syu --noconfirm --sudoloop"
-else if type -q pacman
-  alias pak="pacman -S --noconfirm"
-  alias yeet="pacman -Rsn --noconfirm"
-  alias topgrade="pacman -Syu --noconfirm"
-else if type -q emerge
-  alias pak="emerge"
-  alias yeet="emerge --deselect"
-  alias topgrade="emerge --deep @world"
-end
-
 if type -q neofetch
   neofetch
 end
