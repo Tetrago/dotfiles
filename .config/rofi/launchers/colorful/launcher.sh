@@ -11,20 +11,20 @@
 # style_1     style_2     style_3     style_4     style_5     style_6
 # style_7     style_8     style_9     style_10    style_11    style_12
 
-theme="style_5"
+theme="style_7"
 dir="$HOME/.config/rofi/launchers/colorful"
 
 # dark
-#ALPHA="#00000000"
-#BG="#000000ff"
-#FG="#FFFFFFff"
-#SELECT="#101010ff"
+ALPHA="#00000000"
+BG="#000000ff"
+FG="#FFFFFFff"
+SELECT="#101010ff"
 
 # light
-ALPHA="#00000000"
-BG="#FFFFFFff"
-FG="#000000ff"
-SELECT="#f3f3f3ff"
+#ALPHA="#00000000"
+#BG="#FFFFFFff"
+#FG="#000000ff"
+#SELECT="#f3f3f3ff"
 
 # accent colors
 COLORS=('#EC7875' '#61C766' '#FDD835' '#42A5F5' '#BA68C8' '#4DD0E1' '#00B19F' \
