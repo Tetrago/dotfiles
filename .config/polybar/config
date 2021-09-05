@@ -72,8 +72,9 @@ type = internal/battery
 battery = BAT0
 adapter = ADAC
 
-format-charging = %{A3:$HOME/.config/rofi/bin/applet_battery:}<ramp-capacity><label-charging>%{A}
-format-discharging = %{A3:$HOME/.config/rofi/bin/applet_battery:}<ramp-capacity>%{A}
+format-charging = %{A3:xfc4-power-manager -c:}<ramp-capacity><label-charging>%{A}
+format-discharging = %{A3:xfce4-power-manager -c:}<ramp-capacity>%{A}
+format-full = %{A3:xfce4-power-manager -c:}<label-full>%{A}
 
 label-charging = 
 label-charging-foreground = ${colors.accent}
