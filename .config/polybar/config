@@ -54,6 +54,10 @@ tray-position = right
 tray-padding = 8
 tray-maxsize = 16
 
+[bar/dwm]
+inherit = bar/common
+modules-left = dwm
+
 [bar/bspwm]
 inherit = bar/common
 modules-left = bspwm xwindow
@@ -119,6 +123,39 @@ interval = 1
 date = "%a %d %b "
 time = "%I:%M %p "
 label = %date% %time%
+
+[module/dwm]
+type = internal/dwm
+
+format = <label-tags> <label-title>
+
+enable-tags-click = true
+enable-tags-scroll = false
+
+label-title = %title%
+label-title-padding = 2
+label-title-maxlen = 30
+label-title-default = ""
+
+label-focused = 
+;label-focused = %name%
+label-focused-foreground = ${colors.accent}
+label-focused-padding = 1
+
+label-visible = 
+;label-occupied = %name%
+label-visible-foreground = ${colors.foreground}
+label-visible-padding = ${self.label-focused-padding}
+
+label-urgent = 
+;label-urgent = %name%
+label-urgent-foreground = ${colors.urgent}
+label-urgent-padding = ${self.label-focused-padding}
+
+label-empty = ﱤ
+;label-empty = 
+label-empty-foreground = ${colors.foreground}
+label-empty-padding = ${self.label-focused-padding}
 
 [module/memory]
 type = internal/memory
