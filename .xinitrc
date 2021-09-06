@@ -1,1 +1,1 @@
-PATH=$PATH:$HOME/.dmenu/build/bin AUTOSTART=$HOME/.config/tetrago/autostart.sh $HOME/.dwm/build/bin/dwm
+PATH=$PATH:$HOME/.dmenu/build/bin AUTOSTART=$HOME/.config/tetrago/autostart.sh exec $HOME/.dwm/build/bin/dwm
