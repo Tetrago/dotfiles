@@ -3,3 +3,6 @@
 	url = https://github.com/Tetrago/dwm.git
 [submodule "."]
 	url = https://github.com/Tetrago/dwm.git
+[submodule ".dmenu"]
+	path = .dmenu
+	url = https://github.com/Tetrago/dmenu.git
