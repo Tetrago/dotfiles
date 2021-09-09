@@ -1,1 +1,7 @@
-PATH=$PATH:$HOME/.dmenu/build/bin AUTOSTART=$HOME/.config/tetrago/autostart.sh exec $HOME/.dwm/build/bin/dwm
+#!/usr/bin/env bash
+
+export PATH=$PATH:$HOME/.dmenu/build/bin
+export AUTOSTART=$HOME/.config/tetrago/autostart.sh
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+exec $HOME/.dwm/build/bin/dwm
