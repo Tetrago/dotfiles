@@ -183,7 +183,7 @@ label = %temperature-c%
 format-prefix = " "
 format-prefix-foreground = ${colors.accent}
 
-interval = 86400
+interval = 5
 initial = 1
 
 [module/volume]
