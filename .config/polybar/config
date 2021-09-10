@@ -135,7 +135,7 @@ enable-tags-scroll = false
 
 label-title = %title%
 label-title-padding = 2
-label-title-maxlen = 30
+label-title-maxlen = 40
 label-title-default = ""
 
 label-focused = 
