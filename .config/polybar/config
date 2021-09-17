@@ -54,6 +54,9 @@ tray-position = right
 tray-padding = 8
 tray-maxsize = 16
 
+override-redirect = false
+monitor = ${env:MONITOR:}
+
 [bar/dwm]
 inherit = bar/common
 modules-left = dwm
