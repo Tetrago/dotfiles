@@ -6,3 +6,6 @@
 [submodule ".dmenu"]
 	path = .dmenu
 	url = https://github.com/Tetrago/dmenu.git
+[submodule ".slstatus"]
+	path = .slstatus
+	url = https://github.com/Tetrago/slstatus.git
