@@ -1,7 +1,7 @@
 #!/bin/bash
 
 numlockx on &
-lxsession &
+lxsession --noautostart &
 picom &
 pcmanfm -d &
 nitrogen --restore &
