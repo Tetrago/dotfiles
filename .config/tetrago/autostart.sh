@@ -2,6 +2,7 @@
 
 numlockx on &
 lxsession --noautostart &
+light-locker &
 picom &
 pcmanfm -d &
 nitrogen --restore &
