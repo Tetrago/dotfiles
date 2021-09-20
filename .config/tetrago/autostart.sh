@@ -1,7 +1,7 @@
 #!/bin/bash
 
 numlockx on &
-lxsession --noautostart &
+lxsession &
 light-locker &
 picom &
 pcmanfm -d &
