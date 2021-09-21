@@ -27,8 +27,5 @@ if type -q neofetch
   neofetch
 end
 
-if type -q starship
-  starship init fish | source
-else
-  echo "Skipping 'starship'..."
-end
+starship init fish | source
+zoxide init fish | source
