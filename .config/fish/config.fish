@@ -4,7 +4,7 @@ set -x EDITOR vim
 alias mv="mv -i"
 alias cp="cp -i"
 alias dotfiles="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
-alias op="pcmanfm"
+alias op="xdg-open"
 
 if type -q procs
   alias ps="procs"
