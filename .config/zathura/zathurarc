@@ -1,4 +1,4 @@
-set adjust-open "width"
+set adjust-open "height"
 set pages-per-row 1
 
 map r reload
